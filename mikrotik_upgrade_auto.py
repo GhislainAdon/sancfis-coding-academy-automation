@@ -1,18 +1,28 @@
 #!/usr/bin/python3
-# $ usage : python mikrotik_upgrade_auto.py host/IP
+# $ usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD
 
 import routeros # Mikrotik API
 import requests # HTTP
 import sys
 
-USER = "admin" # Get the admin username
-PASSWORD = "admin" # Get the admin password
-
+# Make sure all arguments needed are passed correctly
 try:
     host = sys.argv[1] # Get the host name or IP @ from the command line argument
 except:
-    print("Router Needed as argument. Usage : python mikrotik_upgrade_auto.py host/IP")
+    print("Router Host name or IP Needed as first argument. Usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD")
     sys.exit(1)
+
+try:
+    USER = sys.argv[2] # Get the admin username from the command line argument
+except:
+    print("Admin username Needed as second argument. Usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD")
+    sys.exit(1)
+try:
+    PASSWORD = sys.argv[3] # Get the admin password from the command line argument
+except:
+    print("Admin password Needed as third argument. Usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD")
+    sys.exit(1)
+
 
 try:
     api = routeros.Api(host, 8728, usessl=False, sslverify=False); # Making sure the Host is reachable
