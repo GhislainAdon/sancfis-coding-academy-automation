@@ -13,12 +13,12 @@ except:
     sys.exit(1)
 
 try:
-    USER = sys.argv[2] # Get the admin username from the command line argument
+    admin_user = sys.argv[2] # Get the admin username from the command line argument
 except:
     print("Admin username Needed as second argument. Usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD")
     sys.exit(1)
 try:
-    PASSWORD = sys.argv[3] # Get the admin password from the command line argument
+    admin_password = sys.argv[3] # Get the admin password from the command line argument
 except:
     print("Admin password Needed as third argument. Usage : python mikrotik_upgrade_auto.py host/IP USER PASSWORD")
     sys.exit(1)
@@ -30,7 +30,7 @@ except:
     print("API Connexion Error")
     sys.exit(1)
 
-ret = api.login(USER, PASSWORD) # Get the login status
+ret = api.login(admin_user, admin_password) # Get the login status
 if not ret:
     print("API Login Error")
     sys.exit(1)
